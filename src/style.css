@@ -1,0 +1,411 @@
+/**
+ * Global stylesheet for GarbaWave — "Heavy Navratri, Time-Aware" Theme System.
+ * All motifs are pure CSS or inline SVG (zero raster images).
+ *
+ * Spec reference: docs/07-design-theme-spec.md
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── 1. Theme CSS Custom Properties ─────────────────────────────────────────── */
+
+:root,
+[data-time-theme="raat"] {
+  /* Raat (Night, ~9pm–5am): Midnight indigo & neon magenta/cyan 24/7 party */
+  --bg-base: #070712;
+  --bg-elevated: #111126;
+  --bg-card: #181834;
+  --bg-card-hover: #222248;
+  --border-subtle: #292952;
+  --border-active: #ff2a85;
+  --text-primary: #ffffff;
+  --text-secondary: #a3a7d4;
+  --text-muted: #6a6e9c;
+  --accent-primary: #ff2a85;       /* neon pink/magenta */
+  --accent-secondary: #00f0ff;     /* electric cyan */
+  --accent-gold: #ffb700;          /* festival gold */
+  --glow-primary: rgba(255, 42, 133, 0.45);
+  --glow-secondary: rgba(0, 240, 255, 0.35);
+  --motif-opacity: 0.7;
+  --mandala-opacity: 0.22;
+  --bandhani-opacity: 0.08;
+  --chip-bg: #161633;
+  --chip-text: #e6e8ff;
+  --chip-border: #333366;
+  --player-bg: #0d0d1e;
+  --header-bg: rgba(7, 7, 18, 0.92);
+}
+
+[data-time-theme="prabhat"] {
+  /* Prabhat (Morning, ~5am–11am): Soft devotional cream & marigold/turmeric */
+  --bg-base: #fdfbf7;
+  --bg-elevated: #f4ede2;
+  --bg-card: #ffffff;
+  --bg-card-hover: #faefe1;
+  --border-subtle: #e8dcce;
+  --border-active: #e65100;
+  --text-primary: #4a2c20;         /* deep maroon/earth */
+  --text-secondary: #785242;
+  --text-muted: #a37c6c;
+  --accent-primary: #e65100;       /* soft marigold orange */
+  --accent-secondary: #f57f17;     /* turmeric yellow */
+  --accent-gold: #fbc02d;          /* aarti gold */
+  --glow-primary: rgba(230, 81, 0, 0.25);
+  --glow-secondary: rgba(251, 192, 45, 0.3);
+  --motif-opacity: 0.22;
+  --mandala-opacity: 0.12;
+  --bandhani-opacity: 0.04;
+  --chip-bg: #f3e8d8;
+  --chip-text: #4a2c20;
+  --chip-border: #e0d0be;
+  --player-bg: #f7efe4;
+  --header-bg: rgba(253, 251, 247, 0.92);
+}
+
+[data-time-theme="din"] {
+  /* Din (Afternoon, ~11am–5pm): Warm sandstone & saffron/teal */
+  --bg-base: #f8f4ec;
+  --bg-elevated: #ece3d2;
+  --bg-card: #ffffff;
+  --bg-card-hover: #fdf8ef;
+  --border-subtle: #ded1be;
+  --border-active: #d84315;
+  --text-primary: #2c2825;
+  --text-secondary: #63584e;
+  --text-muted: #918579;
+  --accent-primary: #d84315;       /* vibrant saffron */
+  --accent-secondary: #00897b;     /* festival teal */
+  --accent-gold: #f57f17;          /* golden sun */
+  --glow-primary: rgba(216, 67, 21, 0.28);
+  --glow-secondary: rgba(0, 137, 123, 0.25);
+  --motif-opacity: 0.32;
+  --mandala-opacity: 0.16;
+  --bandhani-opacity: 0.06;
+  --chip-bg: #ede2cf;
+  --chip-text: #332d26;
+  --chip-border: #d9cbb4;
+  --player-bg: #efe6d6;
+  --header-bg: rgba(248, 244, 236, 0.92);
+}
+
+[data-time-theme="sanj"] {
+  /* Sanj (Evening, ~5pm–9pm): Deep rani magenta & hot pink/gold peak energy */
+  --bg-base: #1f0816;
+  --bg-elevated: #2e0c22;
+  --bg-card: #3d102e;
+  --bg-card-hover: #4e163b;
+  --border-subtle: #611b49;
+  --border-active: #ff1493;
+  --text-primary: #fff0f5;         /* pale rose */
+  --text-secondary: #e8b6cc;
+  --text-muted: #b07d96;
+  --accent-primary: #ff1493;       /* deep rani / hot pink */
+  --accent-secondary: #ffd700;     /* gold */
+  --accent-gold: #ffc107;
+  --glow-primary: rgba(255, 20, 147, 0.45);
+  --glow-secondary: rgba(255, 215, 0, 0.4);
+  --motif-opacity: 0.6;
+  --mandala-opacity: 0.25;
+  --bandhani-opacity: 0.08;
+  --chip-bg: #380e2b;
+  --chip-text: #fff0f7;
+  --chip-border: #6b1e52;
+  --player-bg: #26091c;
+  --header-bg: rgba(31, 8, 22, 0.92);
+}
+
+/* ─── 2. Base Resets & Transitions ───────────────────────────────────────────── */
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: 'Poppins', Inter, system-ui, sans-serif;
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+    min-height: 100dvh;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: 'Baloo 2', system-ui, sans-serif;
+  }
+
+  :focus-visible {
+    outline: none;
+    ring: 2px solid var(--accent-primary);
+    ring-offset: 2px;
+    ring-offset-color: var(--bg-base);
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+/* ─── 3. Texture & Pattern Utilities (Pure CSS / SVG) ────────────────────────── */
+
+/* Bandhani Dot Texture Overlay */
+.bandhani-bg {
+  background-image:
+    radial-gradient(circle at 50% 50%, var(--accent-primary) 1px, transparent 1px),
+    radial-gradient(circle at 0% 0%, var(--accent-gold) 0.8px, transparent 0.8px);
+  background-size: 14px 14px;
+}
+
+.bandhani-chip-texture {
+  position: relative;
+  overflow: hidden;
+}
+
+.bandhani-chip-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 4px 4px, var(--accent-gold) 1px, transparent 1px),
+    radial-gradient(circle at 12px 12px, var(--accent-primary) 0.8px, transparent 0.8px);
+  background-size: 16px 16px;
+  opacity: var(--bandhani-opacity);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* ─── 4. Navratri Motion & Dance Rhythms ───────────────────────────────────────── */
+
+:root {
+  --garba-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --garba-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Rotating Mandala Backdrop */
+@keyframes mandala-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mandala-rotate {
+  animation: mandala-spin 160s linear infinite;
+  transform-origin: center center;
+  color: var(--accent-primary);
+  opacity: var(--mandala-opacity);
+  transition: opacity 0.5s ease, color 0.5s ease;
+}
+
+/* Diya Flame Multi-stage Flicker */
+@keyframes diya-flame-anim {
+  0%, 100% {
+    transform: scale(1) translateY(0) rotate(0deg);
+    opacity: 0.95;
+    filter: drop-shadow(0 -2px 4px var(--accent-gold));
+  }
+  20% {
+    transform: scale(1.06, 0.94) translateY(-1px) rotate(-1.5deg);
+    opacity: 1;
+    filter: drop-shadow(0 -3px 6px var(--accent-primary));
+  }
+  40% {
+    transform: scale(0.92, 1.08) translateY(-2px) rotate(1.5deg);
+    opacity: 0.88;
+    filter: drop-shadow(0 -2px 3px var(--accent-gold));
+  }
+  70% {
+    transform: scale(1.04, 0.96) translateY(0.5px) rotate(-1deg);
+    opacity: 1;
+    filter: drop-shadow(0 -3px 5px var(--accent-gold));
+  }
+}
+
+.diya-flame-flicker {
+  animation: diya-flame-anim 2.2s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+/* Abhla (Mirror-work) Sparkle Pulse */
+@keyframes mirror-twinkle {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 6px var(--accent-gold));
+  }
+}
+
+.abhla-sparkle-pulse {
+  animation: mirror-twinkle 3.5s var(--garba-bounce) infinite;
+}
+
+/* Dandiya Clacking Loading Spinner */
+@keyframes dandiya-clack-left {
+  0%, 100% { transform: rotate(-18deg); }
+  50% { transform: rotate(12deg); }
+}
+
+@keyframes dandiya-clack-right {
+  0%, 100% { transform: rotate(18deg); }
+  50% { transform: rotate(-12deg); }
+}
+
+.dandiya-clacking-animation .dandiya-stick-1 {
+  animation: dandiya-clack-left 0.7s var(--garba-bounce) infinite;
+  transform-origin: 24px 24px;
+}
+
+.dandiya-clacking-animation .dandiya-stick-2 {
+  animation: dandiya-clack-right 0.7s var(--garba-bounce) infinite;
+  transform-origin: 24px 24px;
+}
+
+/* Garba Clap Ripple (radiating on tap) */
+@keyframes garba-clap-ripple {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+.clap-ripple-effect {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, var(--accent-gold) 10%, var(--accent-primary) 60%, transparent 80%);
+  animation: garba-clap-ripple 0.55s var(--garba-bounce) forwards;
+  pointer-events: none;
+}
+
+/* 24/7 Live Pulse */
+@keyframes live-glow {
+  0%, 100% {
+    opacity: 0.85;
+    box-shadow: 0 0 0 0 var(--glow-primary);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 12px 3px var(--glow-primary);
+  }
+}
+
+.live-badge-pulse {
+  animation: live-glow 2s ease-in-out infinite;
+}
+
+/* ─── 5. Dandiya Progress Bar Styling ────────────────────────────────────────── */
+
+.dandiya-progress-track {
+  position: relative;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--border-subtle);
+  overflow: visible;
+}
+
+.dandiya-progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary), var(--accent-gold));
+  background-size: 200% 100%;
+  box-shadow: 0 0 8px var(--glow-primary);
+  transition: width 0.3s ease;
+}
+
+.dandiya-seek-dot {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background: var(--accent-gold);
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 8px var(--accent-gold);
+  margin-left: -7px;
+  transition: transform 0.15s var(--garba-bounce), opacity 0.2s ease;
+}
+
+/* ─── 6. Song Row Left Edge & Abhla Dot ──────────────────────────────────────── */
+
+.garba-song-row {
+  border-left: 3px solid transparent;
+  transition: all 0.2s var(--garba-bounce);
+}
+
+.garba-song-row:hover {
+  border-left-color: var(--accent-primary);
+  transform: translateX(2px);
+}
+
+.garba-song-row.is-active-track {
+  border-left-color: var(--accent-primary);
+  background-color: var(--bg-card-hover) !important;
+  box-shadow: 0 0 16px var(--glow-primary);
+}
+
+/* Peacock Flourish for Raat theme */
+.peacock-corner-wrap {
+  display: none;
+}
+
+[data-time-theme="raat"] .peacock-corner-wrap {
+  display: block;
+}
+
+/* ─── 7. Accessibility: prefers-reduced-motion ───────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .mandala-rotate {
+    animation: none !important;
+    transform: rotate(0deg) !important;
+  }
+
+  .diya-flame-flicker {
+    animation: none !important;
+  }
+
+  .abhla-sparkle-pulse {
+    animation: none !important;
+    opacity: 0.6 !important;
+  }
+
+  .dandiya-clacking-animation .dandiya-stick-1,
+  .dandiya-clacking-animation .dandiya-stick-2 {
+    animation: none !important;
+  }
+}
+
+/* ─── 8. Utilities ───────────────────────────────────────────────────────────── */
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "garbawave",
+  "private": true,
+  "version": "0.1.0",
+  "description": "GarbaWave — lightweight Gujarati Garba/Raas/Dandiya music player",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext .ts",
+    "validate-catalogue": "node scripts/validate-catalogue.mjs"
+  },
+  "devDependencies": {
+    "@types/youtube": "^0.1.0",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  }
+}

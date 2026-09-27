@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" data-time-theme="raat">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#070712" />
+    <meta name="description" content="Explore the full GarbaWave catalogue — search, filter and sort Gujarati Garba, Raas &amp; Dandiya music." />
+    <title>Explore — GarbaWave 🪔</title>
+
+    <!-- Google Fonts: Baloo 2 (Display) + Poppins (UI) per docs/07-design-theme-spec.md §4 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪔</text></svg>" />
+  </head>
+
+  <body class="relative min-h-dvh overflow-x-hidden">
+
+    <!-- ── Peacock Corner Flourish (Raat Theme Accent) ───────────────────── -->
+    <div id="peacock-flourish-mount" class="peacock-corner-wrap absolute top-0 right-0 pointer-events-none z-30 opacity-70 overflow-hidden"></div>
+
+    <!-- ── Header ────────────────────────────────────────────────────────── -->
+    <header class="sticky top-0 z-40 backdrop-blur-md border-b border-theme-subtle" style="background-color: var(--header-bg);">
+      <div class="max-w-3xl mx-auto px-4 py-2.5 flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <a href="/" class="flex items-center gap-2 text-theme-primary hover:text-theme-accent transition-colors">
+            <span aria-hidden="true" class="text-base font-bold">←</span>
+            <span class="text-2xl select-none" aria-hidden="true">🪔</span>
+            <span class="font-display font-bold text-xl tracking-tight leading-none">GarbaWave</span>
+          </a>
+        </div>
+
+        <div class="flex items-center gap-1.5 sm:gap-2">
+          <div id="live-presence-mount" class="hidden sm:block"></div>
+          <div id="theme-toggle-mount"></div>
+          <span class="font-display font-semibold text-xs text-theme-muted px-2.5 py-1 rounded-full bg-surface-card border border-theme-subtle">Explore</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Search + Sort bar ─────────────────────────────────────────────── -->
+    <div class="max-w-3xl mx-auto px-4 pt-6 pb-2 flex flex-col sm:flex-row gap-3">
+      <div class="relative flex-1">
+        <label for="search-input" class="sr-only">Search songs</label>
+        <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-theme-muted pointer-events-none text-xs" aria-hidden="true">
+          🔍
+        </span>
+        <input
+          id="search-input"
+          type="search"
+          placeholder="Search Garba songs, artists, Sanedo, Dandiya, Kutchi…"
+          autocomplete="off"
+          class="w-full pl-9 pr-4 py-2.5 rounded-xl bg-surface-card border border-theme-subtle text-theme-primary placeholder:text-theme-muted text-sm focus:outline-none focus:ring-2 focus:ring-theme-accent focus:border-transparent transition-all"
+        />
+      </div>
+
+      <div class="relative flex-shrink-0">
+        <label for="sort-select" class="sr-only">Sort by</label>
+        <select
+          id="sort-select"
+          class="w-full sm:w-auto pl-3.5 pr-8 py-2.5 rounded-xl bg-surface-card border border-theme-subtle text-theme-primary text-sm focus:outline-none focus:ring-2 focus:ring-theme-accent appearance-none cursor-pointer font-sans transition-all"
+        >
+          <option value="playable-first">✨ Playable first</option>
+          <option value="bpm-desc">⚡ Fastest BPM (Peak Raas)</option>
+          <option value="bpm-asc">🕯️ Slowest BPM (Aarti)</option>
+          <option value="newest">📅 Newest</option>
+          <option value="oldest">⌛ Oldest</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ── Results count ─────────────────────────────────────────────────── -->
+    <div class="max-w-3xl mx-auto px-4 py-2">
+      <p id="results-count" class="text-theme-muted text-xs font-medium" aria-live="polite"></p>
+    </div>
+
+    <!-- ── Song grid ─────────────────────────────────────────────────────── -->
+    <main class="max-w-3xl mx-auto px-4 pb-8">
+      <div
+        id="song-list"
+        role="list"
+        aria-label="Song catalogue"
+        class="grid grid-cols-1 md:grid-cols-2 gap-2.5"
+      >
+        <div role="listitem" class="col-span-full text-theme-muted text-center py-12 text-sm flex flex-col items-center gap-3">
+          <div id="loading-spinner-mount"></div>
+          <span>Loading full catalogue…</span>
+        </div>
+      </div>
+    </main>
+
+    <!-- ── Footer ────────────────────────────────────────────────────────── -->
+    <footer class="max-w-3xl mx-auto px-4 py-6 border-t border-theme-subtle text-center">
+      <p class="text-theme-muted text-xs">
+        Music streamed strictly via the official YouTube IFrame API.
+        &nbsp;·&nbsp;
+        <a
+          href="mailto:madhur@example.com?subject=Report%20a%20track%20on%20GarbaWave"
+          class="text-theme-accent hover:underline underline-offset-2 transition-colors font-medium"
+        >Report a track</a>
+      </p>
+    </footer>
+
+    <script type="module" src="/src/explore.ts"></script>
+  </body>
+</html>

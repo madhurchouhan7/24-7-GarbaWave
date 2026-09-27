@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en" data-time-theme="raat">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#070712" />
+    <meta name="description" content="GarbaWave — All the Garba in the world. A lightweight, time-aware Gujarati Garba, Raas &amp; Dandiya music player." />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="GarbaWave — 24/7 Navratri Garba" />
+    <meta property="og:description" content="All the Garba in the world — continuous Gujarati Garba, Raas & Dandiya music player." />
+    <meta property="og:type" content="website" />
+
+    <title>GarbaWave — 24/7 Garba 🪔</title>
+
+    <!-- Google Fonts: Baloo 2 (Display) + Poppins (UI) per docs/07-design-theme-spec.md §4 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪔</text></svg>" />
+  </head>
+
+  <body class="relative min-h-dvh overflow-x-hidden">
+
+    <!-- ── Peacock Corner Flourish (Raat Theme Accent) ───────────────────── -->
+    <div id="peacock-flourish-mount" class="peacock-corner-wrap absolute top-0 right-0 pointer-events-none z-30 opacity-70 overflow-hidden"></div>
+
+    <!-- ── Header ────────────────────────────────────────────────────────── -->
+    <header class="sticky top-0 z-40 backdrop-blur-md border-b border-theme-subtle" style="background-color: var(--header-bg);">
+      <div class="max-w-3xl mx-auto px-4 py-2.5 flex items-center justify-between gap-2">
+        <!-- Logo / Wordmark -->
+        <div class="flex items-center gap-2">
+          <span class="text-2xl select-none" aria-hidden="true">🪔</span>
+          <div class="flex flex-col">
+            <div class="flex items-center gap-1.5">
+              <span class="font-display font-bold text-xl tracking-tight text-theme-primary leading-none">GarbaWave</span>
+              <!-- 24/7 Live badge with diya motif -->
+              <span
+                class="live-badge-pulse text-[10px] font-bold px-2 py-0.5 rounded-full text-white uppercase tracking-wider flex items-center gap-1"
+                style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-gold));"
+                aria-label="24/7 Live playback"
+              >
+                <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                LIVE
+              </span>
+            </div>
+            <span class="text-[10px] text-theme-muted font-sans font-medium -mt-0.5">૨૪/૭ ગરબા સંગ્રહ</span>
+          </div>
+        </div>
+
+        <!-- Header Actions: Live Presence, Theme Toggle + Explore Link -->
+        <div class="flex items-center gap-1.5 sm:gap-2">
+          <!-- Live Listener Count Mount (Features v2 §1) -->
+          <div id="live-presence-mount" class="hidden sm:block"></div>
+
+          <!-- Theme Toggle Mount (injected by src/theme.ts) -->
+          <div id="theme-toggle-mount"></div>
+
+          <!-- Explore Nav Link -->
+          <nav aria-label="Main navigation">
+            <a
+              href="/explore/"
+              class="flex items-center gap-1 text-xs font-medium px-3 py-1.5 rounded-full bg-surface-card hover:bg-surface-elevated text-theme-primary border border-theme-subtle transition-all duration-200"
+            >
+              <span>Explore</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Hero Stage with Mandala Backdrop ──────────────────────────────── -->
+    <section id="hero-stage" class="relative max-w-3xl mx-auto px-4 pt-8 pb-4 text-center overflow-hidden min-h-[220px]">
+      <!-- Rotating Mandala Background -->
+      <div id="mandala-backdrop-mount" class="absolute inset-0 flex items-center justify-center pointer-events-none -z-10 select-none overflow-hidden"></div>
+
+      <!-- Time-of-Day Mood Banner -->
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border border-theme-subtle mb-3 backdrop-blur-sm" style="background-color: var(--bg-card); color: var(--accent-primary);">
+        <span id="hero-time-icon" aria-hidden="true">🪔</span>
+        <span id="hero-time-badge" class="font-semibold tracking-wide">Navratri Mood</span>
+        <span class="text-theme-muted">•</span>
+        <span id="hero-time-desc" class="text-theme-secondary text-[11px]">Continuous Garba Stream</span>
+      </div>
+
+      <!-- Hero Heading in Baloo 2 -->
+      <h1 class="font-display text-3xl sm:text-4xl font-extrabold text-theme-primary leading-tight">
+        All the Garba<br />
+        <span class="text-transparent bg-clip-text" style="background-image: linear-gradient(135deg, var(--accent-primary), var(--accent-gold));">
+          in the world
+        </span>
+      </h1>
+
+      <p class="mt-2 text-theme-secondary text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
+        Tap a genre and step into the circle. Continuous, authentic Gujarati Garba, Raas &amp; Dandiya.
+      </p>
+
+      <!-- Hero v2 Action Pills: Setlist Builder + Sing-Along -->
+      <div class="flex items-center justify-center gap-2 mt-4">
+        <button
+          id="set-builder-trigger-btn"
+          type="button"
+          class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-surface-card hover:bg-surface-elevated text-theme-primary border border-theme-subtle hover:border-theme-active shadow-sm transition-all duration-200 cursor-pointer"
+        >
+          <span>🥢</span>
+          <span>Build Event Setlist</span>
+        </button>
+
+        <button
+          id="hero-lyrics-trigger-btn"
+          type="button"
+          class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-surface-card hover:bg-surface-elevated text-theme-primary border border-theme-subtle hover:border-theme-active shadow-sm transition-all duration-200 cursor-pointer"
+        >
+          <span>📜</span>
+          <span>Sing-Along Lyrics</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ── Error banner ─────────────────────────────────────────────────── -->
+    <div
+      id="error-banner"
+      role="alert"
+      class="hidden max-w-3xl mx-auto my-3 px-4 py-3 rounded-xl bg-red-950/80 border border-red-700 text-red-200 text-sm"
+    ></div>
+
+    <!-- ── Navratri 9-Day Sacred Color Widget Mount (Features v2 §2) ─────── -->
+    <div class="max-w-3xl mx-auto px-4 mt-2">
+      <div id="navratri-day-mount"></div>
+    </div>
+
+    <!-- ── Genre Chip Bar Mount ──────────────────────────────────────────── -->
+    <div id="chip-mount" class="max-w-3xl mx-auto mt-2 min-h-[58px]"></div>
+
+    <!-- ── Now Playing / Queue List ─────────────────────────────────────── -->
+    <main class="max-w-3xl mx-auto px-4 mt-6">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-theme-gold" aria-hidden="true">✨</span>
+          <h2 class="font-display text-theme-primary font-bold text-base tracking-wide">Up Next in Circle</h2>
+        </div>
+        <span class="text-theme-muted text-xs font-medium" id="queue-count" aria-live="polite"></span>
+      </div>
+
+      <div
+        id="song-list"
+        role="list"
+        aria-label="Song queue"
+        class="flex flex-col gap-2.5"
+      >
+        <!-- Song cards rendered by main.ts -->
+        <div role="listitem" class="text-theme-muted text-center py-12 text-sm flex flex-col items-center gap-3">
+          <div id="loading-spinner-mount"></div>
+          <span>Loading Garba songs…</span>
+        </div>
+      </div>
+    </main>
+
+    <!-- ── Footer ────────────────────────────────────────────────────────── -->
+    <footer class="max-w-3xl mx-auto px-4 py-8 mt-12 border-t border-theme-subtle text-center">
+      <div class="flex items-center justify-center gap-2 mb-2 text-theme-muted text-xs">
+        <span>🏺</span>
+        <span>Made with devotion for Navratri &amp; Gujarati culture</span>
+        <span>🥢</span>
+      </div>
+      <p class="text-theme-muted text-xs">
+        Music streamed strictly via the official YouTube IFrame API. GarbaWave does not host any audio.
+        &nbsp;·&nbsp;
+        <a
+          href="mailto:madhur@example.com?subject=Report%20a%20track%20on%20GarbaWave"
+          class="text-theme-accent hover:underline underline-offset-2 transition-colors font-medium"
+        >Report a track</a>
+      </p>
+    </footer>
+
+    <!-- ── Main App Entry ────────────────────────────────────────────────── -->
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
