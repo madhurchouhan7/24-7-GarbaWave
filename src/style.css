@@ -285,12 +285,31 @@
   }
 }
 
-.clap-ripple-effect {
-  position: absolute;
-  border-radius: 9999px;
-  background: radial-gradient(circle, var(--accent-gold) 10%, var(--accent-primary) 60%, transparent 80%);
-  animation: garba-clap-ripple 0.55s var(--garba-bounce) forwards;
-  pointer-events: none;
+/* Floating Reaction Emojis */
+@keyframes floatUpSway {
+  0% {
+    opacity: 1;
+    transform: translateY(0) translateX(0) scale(0.6);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-80px) translateX(var(--sway-x, 15px)) scale(1.15);
+  }
+  70% {
+    opacity: 0.85;
+    transform: translateY(-220px) translateX(calc(var(--sway-x, 15px) * -1)) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-380px) translateX(var(--sway-x, 10px)) scale(0.8);
+  }
+}
+
+.toran-garland-wrap {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  opacity: 0.85;
 }
 
 /* 24/7 Live Pulse */
@@ -409,3 +428,137 @@
     display: none;
   }
 }
+
+/* ─── 9. Creative Features CSS ───────────────────────────────────────────────── */
+
+/* Streak Badge */
+@keyframes streakGlow {
+  0%, 100% { box-shadow: 0 0 6px var(--accent-gold), 0 0 12px rgba(255,183,0,0.4); }
+  50% { box-shadow: 0 0 12px var(--accent-gold), 0 0 24px rgba(255,183,0,0.6); }
+}
+.streak-badge-glow { animation: streakGlow 2s ease-in-out infinite; }
+
+/* Breathing Ring */
+@keyframes breatheRing {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(var(--ring-scale, 1.3)); opacity: 1; }
+}
+.breathing-ring {
+  animation: breatheRing var(--ring-duration, 0.5s) ease-in-out infinite;
+  transform-origin: center;
+}
+.breathing-ring-2 {
+  animation: breatheRing var(--ring-duration, 0.5s) ease-in-out infinite;
+  animation-delay: calc(var(--ring-duration, 0.5s) * 0.15);
+  transform-origin: center;
+}
+.breathing-ring-3 {
+  animation: breatheRing var(--ring-duration, 0.5s) ease-in-out infinite;
+  animation-delay: calc(var(--ring-duration, 0.5s) * 0.30);
+  transform-origin: center;
+}
+.breathing-ring-paused { animation-play-state: paused; }
+
+/* Hype Meter Bar */
+@keyframes hypeShimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.hype-bar-fill {
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-gold), var(--accent-primary));
+  background-size: 200% auto;
+  animation: hypeShimmer 2s linear infinite;
+  transition: width 0.8s ease;
+}
+
+/* Night Challenge Circles */
+@keyframes challengePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,183,0,0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(255,183,0,0); }
+}
+.challenge-night-current { animation: challengePulse 1.5s ease-in-out infinite; }
+
+/* Navratri Confetti */
+@keyframes confettiFall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(200px) rotate(720deg); opacity: 0; }
+}
+.confetti-piece {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  animation: confettiFall 2s ease-in infinite;
+}
+
+/* Passport Badge Shimmer */
+@keyframes passportShimmer {
+  0% { background-position: -100% center; }
+  100% { background-position: 200% center; }
+}
+.passport-badge-unlocked {
+  background: linear-gradient(90deg, var(--accent-gold) 0%, #fff8e1 40%, var(--accent-gold) 100%);
+  background-size: 200% auto;
+  animation: passportShimmer 2.5s linear infinite;
+}
+
+/* Color of Night Banner */
+@keyframes nightColorSlide {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { transform: translateY(0); opacity: 1; }
+  85% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100%); opacity: 0; }
+}
+.color-of-night-banner { animation: nightColorSlide 8s ease forwards; }
+
+/* Aarti Clock Pulse */
+@keyframes aartiPulse {
+  0%, 100% { border-color: var(--accent-gold); }
+  50% { border-color: var(--accent-primary); }
+}
+.aarti-pulse { animation: aartiPulse 1.2s ease-in-out infinite; }
+
+/* Taali Coach */
+@keyframes taaliTargetPulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+.taali-target-ring { animation: taaliTargetPulse var(--taali-beat-dur, 0.5s) ease-in-out infinite; }
+
+@keyframes taaliFlash {
+  0% { background-color: var(--accent-gold); transform: scale(1.15); }
+  100% { background-color: transparent; transform: scale(1); }
+}
+.taali-on-beat { animation: taaliFlash 0.2s ease-out forwards; }
+
+/* Personal Stats */
+@keyframes statCardIn {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.stat-card-animate { animation: statCardIn 0.3s ease-out forwards; }
+
+/* Champion Badge */
+@keyframes championGlow {
+  0%, 100% { box-shadow: 0 0 16px var(--accent-gold), 0 0 32px rgba(255,183,0,0.3); }
+  50% { box-shadow: 0 0 24px var(--accent-gold), 0 0 48px rgba(255,183,0,0.5); }
+}
+.champion-badge { animation: championGlow 2s ease-in-out infinite; }
+
+/* BPM Ramp dot pulse */
+@keyframes bpmDotPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.bpm-ramp-dot { animation: bpmDotPulse 0.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .streak-badge-glow,
+  .breathing-ring, .breathing-ring-2, .breathing-ring-3,
+  .hype-bar-fill, .challenge-night-current,
+  .passport-badge-unlocked, .aarti-pulse, .taali-target-ring,
+  .stat-card-animate, .champion-badge, .bpm-ramp-dot {
+    animation: none !important;
+  }
+}
+

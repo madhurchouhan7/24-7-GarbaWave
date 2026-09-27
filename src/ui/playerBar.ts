@@ -15,6 +15,9 @@ import { player } from '../player';
 import { getCrossedDandiyaSVG, getDiyaFlameSVG } from './motifs';
 import { openLyricsModal } from '../features/lyrics';
 import { shareNowPlaying } from '../features/share';
+import { openFullPlayerModal } from './fullPlayerModal';
+import { onChapterChange } from '../features/chapterTracker';
+
 
 const PLAY_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>`;
 const PAUSE_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
@@ -118,7 +121,9 @@ export function buildPlayerBar(): HTMLElement {
 
   // Track text block
   const textBlock = document.createElement('div');
-  textBlock.className = 'flex-1 min-w-0';
+  textBlock.className = 'flex-1 min-w-0 cursor-pointer group';
+  textBlock.title = 'Click to open full-screen Now Playing stage';
+  textBlock.addEventListener('click', () => openFullPlayerModal());
 
   const titleRow = document.createElement('div');
   titleRow.className = 'flex items-center gap-1.5';
@@ -153,8 +158,31 @@ export function buildPlayerBar(): HTMLElement {
   artistRow.appendChild(trackArtist);
   artistRow.appendChild(artistLink);
 
+  // Chapter row — shown only for tracks with a tracklist
+  const chapterRow = document.createElement('div');
+  chapterRow.id = 'player-chapter-row';
+  chapterRow.className = 'hidden flex items-center gap-1 mt-0.5';
+
+  const chapterNow = document.createElement('span');
+  chapterNow.id = 'player-chapter-now';
+  chapterNow.className = 'text-[10px] font-medium text-theme-accent truncate max-w-[140px] sm:max-w-[200px]';
+
+  const chapterArrow = document.createElement('span');
+  chapterArrow.className = 'text-[9px] text-theme-muted flex-shrink-0';
+  chapterArrow.textContent = '·';
+
+  const chapterNext = document.createElement('span');
+  chapterNext.id = 'player-chapter-next';
+  chapterNext.className = 'text-[10px] text-theme-muted truncate max-w-[100px] sm:max-w-[150px]';
+
+  chapterRow.appendChild(chapterNow);
+  chapterRow.appendChild(chapterArrow);
+  chapterRow.appendChild(chapterNext);
+
   textBlock.appendChild(titleRow);
   textBlock.appendChild(artistRow);
+  textBlock.appendChild(chapterRow);
+
 
   leftBlock.appendChild(playBtn);
   leftBlock.appendChild(flameMount);
@@ -248,6 +276,9 @@ export function mountPlayerBar(container: HTMLElement): void {
   const durationEl = bar.querySelector<HTMLSpanElement>('#duration')!;
   const progressWrap = bar.querySelector<HTMLDivElement>('[role="slider"]')!;
   const flameMount = bar.querySelector<HTMLDivElement>('#player-diya-flame')!;
+  const chapterRow = bar.querySelector<HTMLDivElement>('#player-chapter-row')!;
+  const chapterNow = bar.querySelector<HTMLSpanElement>('#player-chapter-now')!;
+  const chapterNext = bar.querySelector<HTMLSpanElement>('#player-chapter-next')!;
 
   subscribe('isPlaying', (s) => {
     playBtn.innerHTML = s.isPlaying ? PAUSE_ICON : PLAY_ICON;
@@ -277,6 +308,11 @@ export function mountPlayerBar(container: HTMLElement): void {
     } else {
       artistLink.classList.add('hidden');
     }
+
+    // Hide chapter row when track has no tracklist
+    if (!s.currentTrack?.tracklist || s.currentTrack.tracklist.length === 0) {
+      chapterRow.classList.add('hidden');
+    }
   });
 
   subscribe('progress', (s) => {
@@ -289,4 +325,22 @@ export function mountPlayerBar(container: HTMLElement): void {
     elapsedEl.textContent = formatSeconds(elapsedSecs);
     durationEl.textContent = formatSeconds(s.durationSeconds);
   });
+
+  // Chapter tracker — shows current/next song within nonstop sets
+  onChapterChange((current, next) => {
+    if (!current) {
+      chapterRow.classList.add('hidden');
+      return;
+    }
+    chapterRow.classList.remove('hidden');
+    chapterNow.textContent = `▶ ${current.title}`;
+    if (next) {
+      chapterNext.textContent = `Next: ${next.title}`;
+      chapterNext.classList.remove('hidden');
+    } else {
+      chapterNext.textContent = 'Last song';
+      chapterNext.classList.remove('hidden');
+    }
+  });
 }
+

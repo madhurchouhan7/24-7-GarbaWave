@@ -84,6 +84,15 @@ export function buildSongCard(song: Song, index: number, queue: Song[]): HTMLEle
     badgesWrap.appendChild(bpmTag);
   }
 
+  // Chapter count badge — shows how many songs are within this nonstop set
+  if (song.tracklist && song.tracklist.length > 0) {
+    const chapBadge = document.createElement('span');
+    chapBadge.className = 'text-[10px] font-sans font-semibold px-1.5 py-0.5 rounded-md bg-surface-elevated text-theme-accent border border-theme-subtle cursor-help';
+    chapBadge.textContent = `📋 ${song.tracklist.length} songs`;
+    chapBadge.title = `This set contains ${song.tracklist.length} individual Garba songs`;
+    badgesWrap.appendChild(chapBadge);
+  }
+
   song.genre.slice(0, 1).forEach((g) => {
     const badge = document.createElement('span');
     badge.className = 'text-[10px] font-sans font-medium px-2 py-0.5 rounded-full bg-surface-elevated text-theme-secondary border border-theme-subtle';

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#070712" />
+    <meta name="theme-color" content="#ff2a85" />
     <meta name="description" content="Explore the full GarbaWave catalogue — search, filter and sort Gujarati Garba, Raas &amp; Dandiya music." />
     <title>Explore — GarbaWave 🪔</title>
 
@@ -14,17 +14,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <noscript><link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪔</text></svg>" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/icon.svg" />
   </head>
 
-  <body class="relative min-h-dvh overflow-x-hidden">
+  <body class="relative min-h-dvh overflow-x-hidden pb-36 sm:pb-44">
+
 
     <!-- ── Peacock Corner Flourish (Raat Theme Accent) ───────────────────── -->
     <div id="peacock-flourish-mount" class="peacock-corner-wrap absolute top-0 right-0 pointer-events-none z-30 opacity-70 overflow-hidden"></div>
 
     <!-- ── Header ────────────────────────────────────────────────────────── -->
     <header class="sticky top-0 z-40 backdrop-blur-md border-b border-theme-subtle" style="background-color: var(--header-bg);">
-      <div class="max-w-3xl mx-auto px-4 py-2.5 flex items-center justify-between gap-2">
+      <div class="max-w-3xl mx-auto px-4 py-2 flex items-center justify-between gap-2">
         <div class="flex items-center gap-2">
           <a href="/" class="flex items-center gap-2 text-theme-primary hover:text-theme-accent transition-colors">
             <span aria-hidden="true" class="text-base font-bold">←</span>
@@ -36,9 +39,14 @@
         <div class="flex items-center gap-1.5 sm:gap-2">
           <div id="live-presence-mount" class="hidden sm:block"></div>
           <div id="theme-toggle-mount"></div>
-          <span class="font-display font-semibold text-xs text-theme-muted px-2.5 py-1 rounded-full bg-surface-card border border-theme-subtle">Explore</span>
+          <button id="header-request-song-btn" class="text-xs font-semibold text-theme-accent px-2.5 py-1 rounded-full bg-surface-card border border-theme-subtle hover:border-theme-active transition-all cursor-pointer">
+            ➕ Request
+          </button>
         </div>
       </div>
+
+      <!-- Festive Toran Garland under header -->
+      <div id="toran-garland-mount" class="toran-garland-wrap"></div>
     </header>
 
     <!-- ── Search + Sort bar ─────────────────────────────────────────────── -->
@@ -51,7 +59,7 @@
         <input
           id="search-input"
           type="search"
-          placeholder="Search Garba songs, artists, Sanedo, Dandiya, Kutchi…"
+          placeholder="Search Garba songs, artists, Sanedo, Dandiya, Kutchi, Aarti…"
           autocomplete="off"
           class="w-full pl-9 pr-4 py-2.5 rounded-xl bg-surface-card border border-theme-subtle text-theme-primary placeholder:text-theme-muted text-sm focus:outline-none focus:ring-2 focus:ring-theme-accent focus:border-transparent transition-all"
         />
@@ -73,7 +81,7 @@
     </div>
 
     <!-- ── Results count ─────────────────────────────────────────────────── -->
-    <div class="max-w-3xl mx-auto px-4 py-2">
+    <div class="max-w-3xl mx-auto px-4 py-2 flex items-center justify-between">
       <p id="results-count" class="text-theme-muted text-xs font-medium" aria-live="polite"></p>
     </div>
 
@@ -93,14 +101,19 @@
     </main>
 
     <!-- ── Footer ────────────────────────────────────────────────────────── -->
-    <footer class="max-w-3xl mx-auto px-4 py-6 border-t border-theme-subtle text-center">
-      <p class="text-theme-muted text-xs">
-        Music streamed strictly via the official YouTube IFrame API.
-        &nbsp;·&nbsp;
+    <footer class="max-w-3xl mx-auto px-4 py-6 border-t border-theme-subtle text-center space-y-2">
+      <div class="flex items-center justify-center gap-3 text-xs">
+        <button id="footer-request-song-btn" class="text-theme-accent hover:underline font-semibold cursor-pointer">
+          ➕ Request / Suggest a Track
+        </button>
+        <span class="text-theme-muted">·</span>
         <a
           href="mailto:madhur@example.com?subject=Report%20a%20track%20on%20GarbaWave"
-          class="text-theme-accent hover:underline underline-offset-2 transition-colors font-medium"
+          class="text-theme-muted hover:text-theme-primary underline underline-offset-2 transition-colors"
         >Report a track</a>
+      </div>
+      <p class="text-theme-muted text-xs">
+        Music streamed strictly via the official YouTube IFrame API.
       </p>
     </footer>
 

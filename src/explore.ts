@@ -1,12 +1,5 @@
 /**
  * explore.ts — Explore page entry point with Features v2 Integration.
- *
- * Features v2:
- *  - BPM sorting (Fastest to Slowest / Slowest to Fastest)
- *  - Live Listener presence integration
- *  - Regional style badges & BPM tags on rows
- *  - Direct lyrics modal viewer
- *  - Left-edge theme accent & Abhla mirror dots
  */
 
 import './style.css';
@@ -20,35 +13,46 @@ import {
   getAbhlaMirrorSVG,
   getPeacockCornerFlourishSVG,
   getDandiyaSpinnerSVG,
+  getToranGarlandSVG,
 } from './ui/motifs';
 import { initLivePresence, mountLiveListenerBadge } from './features/presence';
 import { openLyricsModal } from './features/lyrics';
+import { openRequestSongModal } from './features/requestSong';
+import { initMediaSession } from './features/mediaSession';
+import { initPWA } from './features/pwa';
 
 let allSongs: Song[] = [];
 
 async function boot(): Promise<void> {
-  // 1. Initialize Theme System
+  initPWA();
   initThemeSystem();
-
-  // 2. Initialize Live Presence
   initLivePresence();
+  initMediaSession();
 
-  // 3. Mount Header Controls: Theme Toggle & Live Presence
+  // Header Controls: Theme Toggle & Live Presence
   const toggleMount = document.getElementById('theme-toggle-mount');
   if (toggleMount) mountThemeToggle(toggleMount);
 
   const presenceMount = document.getElementById('live-presence-mount');
   if (presenceMount) mountLiveListenerBadge(presenceMount);
 
-  // 4. Mount Peacock Flourish
+  // Toran Garland
+  const toranMount = document.getElementById('toran-garland-mount');
+  if (toranMount) toranMount.innerHTML = getToranGarlandSVG();
+
+  // Peacock Flourish
   const peacockMount = document.getElementById('peacock-flourish-mount');
   if (peacockMount) peacockMount.innerHTML = getPeacockCornerFlourishSVG();
 
-  // 5. Mount Loading Spinner
+  // Loading Spinner
   const spinnerMount = document.getElementById('loading-spinner-mount');
   if (spinnerMount) spinnerMount.innerHTML = getDandiyaSpinnerSVG(36);
 
-  // 6. Init Player & Sticky Player Bar
+  // Request Song Modal Triggers
+  document.getElementById('header-request-song-btn')?.addEventListener('click', () => openRequestSongModal());
+  document.getElementById('footer-request-song-btn')?.addEventListener('click', () => openRequestSongModal());
+
+  // Init Player & Player Bar
   initPlayer();
   mountPlayerBar(document.body);
 

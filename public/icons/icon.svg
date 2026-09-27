@@ -1,0 +1,55 @@
+<!-- SVG App Icon 192x192 & 512x512 Source -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2a0820" />
+      <stop offset="60%" stop-color="#140410" />
+      <stop offset="100%" stop-color="#070712" />
+    </radialGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe082" />
+      <stop offset="50%" stop-color="#ffb300" />
+      <stop offset="100%" stop-color="#ff8f00" />
+    </linearGradient>
+    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff4081" />
+      <stop offset="100%" stop-color="#e91e63" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Card -->
+  <rect width="512" height="512" rx="128" fill="url(#bgGrad)" />
+  <rect width="496" height="496" x="8" y="8" rx="120" fill="none" stroke="url(#goldGrad)" stroke-width="6" opacity="0.6" />
+
+  <!-- Outer Rangoli Ring -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="url(#goldGrad)" stroke-width="3" stroke-dasharray="8,12" opacity="0.5" />
+
+  <!-- Crossed Dandiya Sticks -->
+  <!-- Stick 1 -->
+  <g transform="rotate(-30 256 256)">
+    <rect x="244" y="96" width="24" height="320" rx="12" fill="url(#pinkGrad)" stroke="#ffffff" stroke-width="3" />
+    <rect x="240" y="140" width="32" height="16" rx="4" fill="url(#goldGrad)" />
+    <rect x="240" y="180" width="32" height="16" rx="4" fill="url(#goldGrad)" />
+    <circle cx="256" cy="96" r="16" fill="url(#goldGrad)" />
+  </g>
+
+  <!-- Stick 2 -->
+  <g transform="rotate(30 256 256)">
+    <rect x="244" y="96" width="24" height="320" rx="12" fill="url(#pinkGrad)" stroke="#ffffff" stroke-width="3" />
+    <rect x="240" y="140" width="32" height="16" rx="4" fill="url(#goldGrad)" />
+    <rect x="240" y="180" width="32" height="16" rx="4" fill="url(#goldGrad)" />
+    <circle cx="256" cy="96" r="16" fill="url(#goldGrad)" />
+  </g>
+
+  <!-- Central Diya Lamp -->
+  <g transform="translate(256, 300)">
+    <path d="M -60,20 C -60,65 60,65 60,20 C 60,20 40,10 0,10 C -40,10 -60,20 -60,20 Z" fill="url(#goldGrad)" />
+    <path d="M 0,-45 C -25,-10 -20,10 0,15 C 20,10 25,-10 0,-45 Z" fill="url(#pinkGrad)" />
+    <path d="M 0,-30 C -12,-5 -10,8 0,12 C 10,8 12,-5 0,-30 Z" fill="#fff9c4" />
+  </g>
+
+  <!-- Brand Wordmark -->
+  <text x="256" y="440" font-family="'Baloo 2', system-ui, sans-serif" font-weight="800" font-size="44" fill="#ffffff" text-anchor="middle" letter-spacing="2">
+    GarbaWave
+  </text>
+</svg>

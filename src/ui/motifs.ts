@@ -253,3 +253,45 @@ export function injectHeroSparkles(container: HTMLElement, count = 12): void {
 
   container.insertBefore(wrap, container.firstChild);
 }
+
+/**
+ * Toran / Bandhanwar Traditional Festive Doorway Garland SVG (Mango Leaves + Marigold Flowers).
+ */
+export function getToranGarlandSVG(): string {
+  return `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 40" width="100%" height="24" preserveAspectRatio="none" class="toran-garland-svg" aria-hidden="true">
+  <defs>
+    <!-- Mango Leaf Motif -->
+    <g id="mangoLeaf">
+      <path d="M 0,0 C 10,15 15,25 0,36 C -15,25 -10,15 0,0 Z" fill="#2e7d32" stroke="#1b5e20" stroke-width="0.8" />
+      <line x1="0" y1="0" x2="0" y2="34" stroke="#81c784" stroke-width="0.8" />
+    </g>
+    <!-- Marigold Flower Motif -->
+    <g id="marigold">
+      <circle cx="0" cy="0" r="7" fill="var(--accent-gold)" />
+      <circle cx="0" cy="0" r="4.5" fill="var(--accent-primary)" />
+      <circle cx="0" cy="0" r="2" fill="#ffe082" />
+    </g>
+  </defs>
+
+  <!-- Golden Garland String -->
+  <line x1="0" y1="4" x2="1200" y2="4" stroke="var(--accent-gold)" stroke-width="2" stroke-dasharray="4,4" />
+
+  <!-- Repeating Mango Leaves and Marigolds across 1200px width -->
+  <g transform="translate(40, 4)"><use href="#mangoLeaf" /><use href="#marigold" transform="translate(0, 0)" /></g>
+  <g transform="translate(120, 4)"><use href="#mangoLeaf" /><use href="#marigold" transform="translate(0, 0)" /></g>
+  <g transform="translate(200, 4)"><use href="#mangoLeaf" /><use href="#marigold" transform="translate(0, 0)" /></g>
+  <g transform="translate(280, 4)"><use href="#mangoLeaf" /><use href="#marigold" transform="translate(0, 0)" /></g>
+  <g transform="translate(360, 4)"><use href="#mangoLeaf" /><use href="#marigold" transform="translate(0, 0)" /></g>
+  <g transform="translate(440, 4)"><use href="#mangoLeaf" /><use href="#marigold" transform="translate(0, 0)" /></g>
+  <g transform="translate(520, 4)"><use href="#mangoLeaf" /><use href="#marigold" transform="translate(0, 0)" /></g>
+  <g transform="translate(600, 4)"><use href="#mangoLeaf" /><use href="#marigold" transform="translate(0, 0)" /></g>
+  <g transform="translate(680, 4)"><use href="#mangoLeaf" /><use href="#marigold" transform="translate(0, 0)" /></g>
+  <g transform="translate(760, 4)"><use href="#mangoLeaf" /><use href="#marigold" transform="translate(0, 0)" /></g>
+  <g transform="translate(840, 4)"><use href="#mangoLeaf" /><use href="#marigold" transform="translate(0, 0)" /></g>
+  <g transform="translate(920, 4)"><use href="#mangoLeaf" /><use href="#marigold" transform="translate(0, 0)" /></g>
+  <g transform="translate(1000, 4)"><use href="#mangoLeaf" /><use href="#marigold" transform="translate(0, 0)" /></g>
+  <g transform="translate(1080, 4)"><use href="#mangoLeaf" /><use href="#marigold" transform="translate(0, 0)" /></g>
+  <g transform="translate(1160, 4)"><use href="#mangoLeaf" /><use href="#marigold" transform="translate(0, 0)" /></g>
+</svg>`.trim();
+}

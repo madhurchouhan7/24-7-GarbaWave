@@ -23,6 +23,14 @@ export interface LyricsData {
   meaning: string[];
 }
 
+/** A single song/chapter within a long nonstop Garba set */
+export interface TrackChapter {
+  title: string;
+  artist?: string;
+  startSeconds: number;
+  endSeconds?: number;
+}
+
 export interface Song {
   id: string;
   title: string;
@@ -38,6 +46,8 @@ export interface Song {
   regionalStyle?: RegionalStyle;
   artistUrl?: string;
   lyrics?: LyricsData;
+  /** For long nonstop videos: individual songs within the set */
+  tracklist?: TrackChapter[];
 }
 
 export type SortMode = 'playable-first' | 'newest' | 'oldest' | 'bpm-asc' | 'bpm-desc';
